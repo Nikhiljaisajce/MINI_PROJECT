@@ -1,0 +1,6 @@
+pip install mysqlclient #for mysql connection
+
+
+pip install Pillow    #for image filed
+
+pip install matplotlib

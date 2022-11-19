@@ -1,0 +1,373 @@
+{% extends 'administrator/master.html' %} {% load static %}
+{% block head %}
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<style>
+    input {
+        padding: 0;
+        margin: 0;
+        outline: none;
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 14px;
+        color: #666;
+        line-height: 22px;
+    }
+
+    h1,
+    h4 {
+        font-weight: 400;
+    }
+
+    h4 {
+        margin: 22px 0 4px;
+    }
+
+    h5 {
+        text-transform: uppercase;
+        color: #095484;
+    }
+
+    .main-block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3px;
+    }
+
+    form {
+        width: 60%;
+        padding: 20px;
+        box-shadow: 0 2px 5px #ccc;
+        background: #fff;
+    }
+
+    input,
+    select {
+        width: calc(100% - 10px);
+        padding: 5px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        vertical-align: middle;
+    }
+
+    textarea {
+        width: calc(100% - 6px);
+        outline: none;
+    }
+
+    input:hover,
+    textarea:hover {
+        outline: none;
+        border: 1px solid #095484;
+    }
+
+    .additional-question th,
+    .additional-question td {
+        width: 38%;
+    }
+
+    .course-rate th,
+    .course-rate td {
+        width: 19%;
+    }
+
+    .first-col,
+    .additional-question .first-col,
+    .course-rate .first-col {
+        width: 24%;
+        text-align: left;
+    }
+
+    .question,
+    .comments {
+        margin: 15px 0 5px;
+    }
+
+    .question-answer label {
+        display: inline-block;
+        padding: 0 20px 15px 0;
+    }
+
+    .question-answer input {
+        width: auto;
+    }
+
+    .question-answer,
+    table {
+        width: 100%;
+    }
+
+    .btn-block {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    button {
+        width: 150px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: #095484;
+        font-size: 16px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #0666a3;
+    }
+    .checkbox-item label {
+        margin: 5px 20px 10px 0;
+    }
+
+    label.radio:before,
+    label.check:before {
+        content: "";
+        position: absolute;
+        left: 0;
+    }
+
+
+
+    input[type=checkbox]:checked+.check:before {
+        background: #095484;
+    }
+    label.radio:after,
+    label.check:after {
+        content: "";
+        position: absolute;
+        top: 6px;
+        width: 8px;
+        height: 4px;
+        background: transparent;
+        border-top: none;
+        border-right: none;
+        transform: rotate(-45deg);
+        opacity: 0;
+    }
+
+    input[type=radio]:checked+label:after,
+    input[type=checkbox]:checked+label:after {
+        opacity: 1;
+    }
+
+
+    @media (min-width: 568px) {
+        th,
+        td {
+            word-break: keep-all;
+        }
+    }
+        /* The Modal (background) */
+
+.popup .overlay {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  z-index:1;
+  display:none;
+}
+
+.popup .content {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:#fff;
+  width:50%;
+  height:30%;
+  z-index:2;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+  font-family:"Open Sans",sans-serif;
+}
+
+.popup .close-btn {
+  cursor:pointer;
+  position:absolute;
+  right:0;
+  top:0;
+  width:30px;
+  height:30px;
+  background:#222;
+  color:#fff;
+  font-size:25px;
+  font-weight:600;
+  line-height:30px;
+  text-align:center;
+  border-radius:50%;
+}
+
+.popup.active .overlay {
+  display:block;
+}
+
+.popup.active .content {
+  transition:all 300ms ease-in-out;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+h2 {
+        font-weight: 400;
+        color: #1c87c9;
+}
+/* end of model style */
+
+</style>
+{% endblock %}
+{% block section %}
+
+<div class="main-block" id="nompaper">
+    <form method="POST">
+        {% csrf_token %}
+        {% if p %}
+        <h1>Panel Edit</h1><br><br>
+        {% endif %}
+        {% for panel in p %}
+            <table>
+                <tr>
+                    <th colspan="2" style="color:blue;"><h4>{{ panel.panel_post }}</h4><hr color="red"></th>
+                </tr>
+                <!-- <tr>
+
+                    <th>Panel Type:</th>
+                    <td><select id="ptype" name="ptype{{ panel.panel_id }}" required>
+                    {% ifequal panel.panel_type  1 %}
+                        <option value="0" >General</option>
+                        <option value="1" selected>Female</option>
+                    {% else %}
+                        <option value="0" selected>General</option>
+                        <option value="1" >Female</option>
+                    {% endifequal %}
+                    </select></td>
+                </tr> -->
+
+                <tr>
+                    <th>Panel Year:</th>
+                    <td><select id="yob" name="yob{{ panel.panel_id }}" required>
+                    {% if panel.panel_year == 0 %}
+                        <option value="0" selected>All years</option>
+                        <option value="1" >1st Year</option>
+                        <option value="2" >2nd Year</option>
+                        <option value="3" >3rd Year</option>
+                        <option value="4" >4th Year</option>
+                    {% elif panel.panel_year == 1 %}
+                        <option value="0" >All years</option>
+                        <option value="1" selected>1st Year</option>
+                        <option value="2" >2nd Year</option>
+                        <option value="3" >3rd Year</option>
+                        <option value="4" >4th Year</option>
+                    {% elif panel.panel_year == 2 %}
+                        <option value="0" >All years</option>
+                        <option value="1" >1st Year</option>
+                        <option value="2" selected>2nd Year</option>
+                        <option value="3" >3rd Year</option>
+                        <option value="4" >4th Year</option>
+                    {% elif panel.panel_year == 3 %}
+                        <option value="0" >All years</option>
+                        <option value="1" >1st Year</option>
+                        <option value="2" >2nd Year</option>
+                        <option value="3" selected>3rd Year</option>
+                        <option value="4" >4th Year</option>
+                    {% elif panel.panel_year == 4 %}
+                        <option value="0" >All years</option>
+                        <option value="1" >1st Year</option>
+                        <option value="2" >2nd Year</option>
+                        <option value="3" >3rd Year</option>
+                        <option value="4" selected>4th Year</option>
+                    {% endif %}
+                    </select></td>
+                </tr>
+
+
+
+                <tr>
+                           <th>Applicable Course:</th>
+                    <td>
+                      <!--   <div class="question-answer checkbox-item">
+                                    <div>
+                                        <input type="checkbox" value='{{ ps.course_id.course_id }}' id='{{ ps.course_id.course_name }}' name="checks" checked />
+                                        <label for='{{ ps.course_id.course_name }}' class="check"><span>{{ ps.course_id.course_name }}</span></label>
+                                    </div>
+                                </div>
+
+                                 {% if panel.panel_id in  list %}
+                            {% for c1 in c %}
+                                <div class="question-answer checkbox-item">
+                                    <div>
+                                        <input type="checkbox" value='{{ c1.course_id }}' id='{{ c1.course_name }}{{ panel.panel_id }}' name="checks"  />
+                                        <label for='{{ c1.course_name }}{{ panel.panel_id }}' class="check"><span>{{ c1.course_name }}</span></label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                                 -->
+
+                            {% for c1 in c %}
+                                <div class="question-answer checkbox-item">
+                                    <div>
+                                        <input type="checkbox" value='{{ c1.course_id }}' id='{{ c1.course_name }}{{ panel.panel_id }}' name="checks{{ panel.panel_id }}" />
+                                        <label for='{{ c1.course_name }}{{ panel.panel_id }}' class="check"><span style="color:darkblue"><b>{{ c1.course_name }}</b>,&nbsp;({{c1.dept_id.dept_name}}) ({{ c1.course_type }})</span></label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                    <div class="btn-block">
+                        <button type="submit" id="approve" name="approve" value="{{ panel.panel_id }}">SAVE</button>
+                     </div>
+                    </td>
+                </tr>
+            </table><br><br>
+        {% endfor %}
+
+
+    </form>
+</div>
+    <!-- The Modal -->
+<div class="popup" id="popup-1">
+  <div class="overlay"></div>
+  <div class="content" style="height:200px">
+    <div class="close-btn" onclick="togglePopup()">&times;</div>
+    <h2 align="left">Message</h2>
+    <span id="popupMsg"></span>
+  </div>
+</div>
+
+{% endblock %}
+{% block script %}
+
+<script>
+
+    $(function() {
+        $(document).scrollTop($("#dataForm").offset().top);
+    });
+
+
+    $(window).load(function() {
+
+        $(document).ready(function() {
+              "{% for panel in p %}"
+                    "{% for ps in p_s %}"
+                        "{% if panel.panel_id == ps.panel_id.panel_id %}"
+                                a = "{{ ps.course_id.course_name }}{{ panel.panel_id }}";
+                                box = document.getElementById(a);
+                                box.checked=true;
+                        "{% endif %}"
+                    "{% endfor %}"
+              "{% endfor %}"
+
+        });
+    });
+
+ </script>
+{% endblock %}

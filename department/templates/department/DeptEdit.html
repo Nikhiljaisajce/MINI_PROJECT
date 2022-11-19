@@ -1,0 +1,342 @@
+    {% extends 'department/master.html' %}
+    {% block head %}
+
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    -->
+    <style>
+
+      form {
+      width: 50%;
+      padding: 20px;
+      border-radius: 3px;
+      background: #fff;
+      box-shadow: 0 0 20px 0 #a82877;
+      margin: 0 auto;
+      margin-bottom: 10px;
+      }
+
+      input,select {
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      border-radius: 1px;
+      }
+      input {
+      width: calc(50% - 10px);
+      padding: 5px;
+      }
+      select {
+      width: 50%;
+      padding: 7px 0;
+      background: transparent;
+      }
+      textarea {
+      width: calc(100% - 12px);
+      padding: 5px;
+      }
+      .item1:hover p, .item1:hover i, .question:hover p, .question label:hover, input:hover::placeholder {
+      color: #a82877;
+      }
+
+      .item1 input:hover, .item1 select:hover, .item1 textarea:hover {
+      border: 1px solid transparent;
+      box-shadow: 0 0 6px 0 #a82877;
+      color: #a82877;
+      }
+      .item1 {
+      position: relative;
+      margin: 10px 0;
+      }
+      input[type="date"]::-webkit-inner-spin-button {
+      display: none;
+      }
+      .item1 i, input[type="date"]::-webkit-calendar-picker-indicator {
+      position: absolute;
+      font-size: 20px;
+      color: #a9a9a9;
+      }
+      .item1 i {
+      right: 1%;
+      top: 30px;
+      z-index: 1;
+      }
+      [type="date"]::-webkit-calendar-picker-indicator {
+      right: 50;
+      z-index: 2;
+      opacity: 0;
+      cursor: pointer;
+      }
+      input[type="time"]::-webkit-inner-spin-button {
+      margin: 2px 22px 0 0;
+      }
+      input[type=radio], input.other {
+      display: none;
+      }
+      label.radio {
+      position: relative;
+      display: inline-block;
+      margin: 5px 20px 10px 0;
+      cursor: pointer;
+      }
+      .question span {
+      margin-left: 30px;
+      }
+      label.radio:before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 0;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      }
+      #radio_5:checked ~ input.other {
+      display: block;
+      }
+      input[type=radio]:checked + label.radio:before {
+      border: 2px solid #a82877;
+      background: #a82877;
+      }
+      label.radio:after {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 5px;
+      width: 7px;
+      height: 4px;
+      border: 3px solid #fff;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-45deg);
+      opacity: 0;
+      }
+      input[type=radio]:checked + label:after {
+      opacity: 1;
+      }
+      .btn-block {
+      margin-top: 10px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #a82877;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      background: #bf1e81;
+      }
+      @media (min-width: 568px) {
+      .name-item1, .city-item1 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      }
+      .name-item1 input, .city-item1 input {
+      width: calc(50% - 20px);
+      }
+      .city-item1 select {
+      width: calc(50% - 8px);
+      }
+      }
+    </style>
+     {% endblock %}
+
+    {% block section %}<br>
+      <form method="POST" id="form1">
+        {% csrf_token %}
+    {% for d in dept %}
+        <div class="item1">
+          <h2 size=10><label  class="item1"><span style="color:blue"><b>Department of {{ d.dept_name }}</b></span></label></h2>
+        </div>
+          <hr color="red"><br>
+          <div class="item1">
+            <p>Email</p>
+            <input type="email" name="dmailOld" id="dmailOld" value="{{ d.dept_email }}"  disabled/>
+        </div>
+
+          <div class="item1">
+              <p>Mobile Number</p>
+              <input type="text" name="txtPhoneOld" id="txtPhoneOld" value="{{ d.dept_phone }}"  disabled/>
+          </div>
+          <hr color="red">
+
+          <div class="item1" id="editDiv">
+            <h4>Edit Details</h4><br>
+
+            <p>Change Email Address</p>
+            <input type="email" name="dmail" id="dmail" placeholder="Email" value="{{ d.dept_email }}" required />
+            <br><span id="spnEmailStatus"></span>
+
+
+              <p>Change Mobile Number</p>
+              <input type="text" name="txtPhone" id="txtPhone" placeholder="Mobile Number" value="{{ d.dept_phone }}"  required maxlength="10"/>
+              <br><span id="spnPhoneStatus"></span>
+          </div>
+          <div class="item1">
+              <span id="old" style="display:none">
+                  <hr color="blue">
+                  <p style="color:red">Enter OTP Received on {{d.dept_email}}</p>
+                  <input type="text" name="oldOtp" id="oldOtp" placeholder="OTP"  required maxlength="6"/>
+              </span>
+              <span id="new" style="display:none">
+                  <p style="color:red">Enter OTP Received on new mail</p>
+                  <input type="text" name="newOtp" id="newOtp" placeholder="OTP"  required maxlength="6"/>
+              </span>
+          </div>
+
+    {% endfor %}
+          <div class="btn-block">
+          <button  id="sendOtp">Send OTP</button>
+              <span id="otpMsg" style="display:none;color:red"><b>Please wait for verification mail</b></span>
+        </div>
+
+        <div class="btn-block">
+          <button type="submit" id="formSubmit" style="display:none">Update</button>
+        </div>
+
+      </form>
+    {% endblock %}
+
+
+
+    {% block script %}
+
+    <script type='text/javascript'>
+    "{% if not messages %}"
+    $(function() {
+        $(document).scrollTop($("#dataForm").offset().top);
+    });
+    "{% endif %}"
+
+    $(window).load(function() {
+
+        $(document).ready(function() {
+            $('#txtPhone').blur(function(e) {
+
+                if (validatePhone('txtPhone')) {
+                    $('#spnPhoneStatus').html('Valid Mobile Number');
+                    $('#spnPhoneStatus').css('color', 'green');
+                } else {
+                    $('#spnPhoneStatus').html('Invalid Mobile Number');
+                    $('#spnPhoneStatus').css('color', 'red');
+
+                }
+
+            }); // txtPhone end
+
+            $('#dmail').blur(function(e) {
+
+                if (IsEmail('dmail')) {
+                    $('#spnEmailStatus').html('Valid Email');
+                    $('#spnEmailStatus').css('color', 'green');
+                } else {
+                    $('#spnEmailStatus').html('Invalid Email');
+                    $('#spnEmailStatus').css('color', 'red');
+
+                }
+
+            }); // dmail end
+
+            $('#sendOtp').click(function(e) {
+
+                if (IsEmail('dmail') == false) {
+                    $('#spnEmailStatus').html('Invalid Email');
+                    $('#spnEmailStatus').css('color', 'red');
+                    var flag = 0;
+                }
+
+                if (validatePhone('txtPhone')) {
+                    //
+                } else {
+                    $('#spnPhoneStatus').html('Invalid Mobile Number');
+                    $('#spnPhoneStatus').css('color', 'red');
+                    var flag = 0;
+
+                }
+
+                if (flag == 0) {
+                    return false;
+                }
+
+                e.preventDefault();
+                $('#sendOtp').css('display', 'none');
+                $('#otpMsg').css('display', '');
+
+                flag = 1;
+                $.ajax({
+                    url: 'validate_dept_edit/',
+                    data: {
+
+                        'dmail': $('#dmail').val(),
+                        'dmob': $('#txtPhone').val()
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        dmail_status = data.dmail_status;
+                        dmob_status = data.dmob_status;
+
+                        if (data.dexist){
+                            $('#otpMsg').html('Data Already Exists');
+                        }
+                        else if (dmail_status){
+                            $('#new').css('display','');
+                            $('#old').css('display','');
+                            $('#formSubmit').css('display', '');
+                            $('#otpMsg').css('display', 'none');
+                            $('#editDiv').css('display', 'none');
+                        }
+                        else if (dmob_status){
+                            $('#old').css('display','');
+                            $('#formSubmit').css('display', '');
+                            $('#otpMsg').css('display', 'none');
+                            $('#editDiv').css('display', 'none');
+                        }
+
+
+
+                    }
+                }); // ajax end
+
+
+
+            }); // send otp end
+
+            $('#formSubmit').click(function(e) {
+                $('#form1').submit();
+
+
+             });        // formsubmit end
+
+
+        }); // ready end
+
+        function validatePhone(txtPhone) {
+            var a = document.getElementById(txtPhone).value;
+            var filter = /[1-9]{1}[0-9]{9}/;
+            if (filter.test(a)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function IsEmail(email) {
+            var a = document.getElementById(email).value;
+            var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!regex.test(a)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+    }); //  load end
+
+    </script>
+    {% endblock %}

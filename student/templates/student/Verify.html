@@ -1,0 +1,170 @@
+ {% extends 'student/master.html' %} {% block head %}
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    form {
+        position: relative;
+        width: 50%;
+        border-radius: 30px;
+        background: #ffffab;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+
+    .form-left-decoration,
+    .form-right-decoration {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 20px;
+        border-radius: 20px;
+        background: #5a7233;
+    }
+
+    .form-left-decoration {
+        bottom: 60px;
+        left: -30px;
+    }
+
+    .form-right-decoration {
+        top: 60px;
+        right: -30px;
+    }
+
+    .form-left-decoration:before,
+    .form-left-decoration:after,
+    .form-right-decoration:before,
+    .form-right-decoration:after {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 20px;
+        border-radius: 30px;
+        background: #fff;
+    }
+
+    .form-left-decoration:before {
+        top: -20px;
+    }
+
+    .form-left-decoration:after {
+        top: 20px;
+        left: 10px;
+    }
+
+    .form-right-decoration:before {
+        top: -20px;
+        right: 0;
+    }
+
+    .form-right-decoration:after {
+        top: 20px;
+        right: 10px;
+    }
+
+    .circle {
+        position: absolute;
+        bottom: 80px;
+        left: -55px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fff;
+    }
+
+    .form-inner {
+        padding: 50px;
+    }
+
+    .form-inner input {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 10px;
+        border: yes;
+        border-radius: 20px;
+        background: #d0dfe8;
+    }
+
+    .form-inner textarea {
+        resize: none;
+    }
+
+    button {
+        width: 50%;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 20px;
+        border: none;
+        border-bottom: 4px solid #3e4f24;
+        background: #5a7233;
+        font-size: 16px;
+        font-weight: 400;
+        color: #fff;
+        align: center;
+    }
+
+    button:hover {
+        background: #3e4f24;
+    }
+
+    @media (max-width: 568px) {
+        form {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %} {% block section %}
+<br>
+ <!-- Default form login -->
+<form class="text-center border border-light p-5" method="post" id="form1">
+    {% csrf_token %}
+    <h3 class="h4 mb-4" style="color:darkblue" align="left"><b>OTP Verification</b></h3>
+
+<div id="mainBlock" style="display:none">
+
+    <!-- Password -->
+    <p align="left" style="color:red">Please enter one time password send to your registered email</p>
+    <input type="text" id="otp" name="otp" class="form-control mb-4" placeholder="Enter OTP" maxlength="6">
+
+    <!-- Sign in button -->
+    <button class="btn btn-info btn-block my-4" type="submit" id="formSubmit" name="formSubmit" ><b>Verify OTP</b></button>
+</div>
+
+<div id="sendMsg" style="display:none">
+    <button class="btn btn-info btn-block my-4" type="submit" id="sendOtp" name="sendOtp"  style="border-radius:15px;background-color:green"><b>SEND OTP</b></button>
+</div>
+
+</form>
+<!-- Default form login -->
+{% endblock %}
+
+ {% block script %}
+<script type='text/javascript'>
+
+   $(function() {
+        $(document).scrollTop($("#dataForm").offset().top);
+    });
+
+    $(window).load(function() {
+
+        $(document).ready(function() {
+
+            "{% if initState == 0 %}"
+                $('#sendMsg').css('display','');
+            "{% endif %}"
+            "{% if initState == 1 %}"
+                $('#mainBlock').css('display','');
+            "{% endif %}"
+        }); // ready end
+
+    }); //  load end
+
+
+ </script>
+
+{% endblock %}

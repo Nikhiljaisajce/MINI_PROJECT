@@ -1,0 +1,312 @@
+ {% extends 'student/master.html' %} {% block head %}
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<style>
+    input {
+        padding: 0;
+        margin: 0;
+        outline: none;
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 14px;
+        color: #666;
+        line-height: 22px;
+    }
+
+    h1,
+    h4 {
+        font-weight: 400;
+    }
+
+    h4 {
+        margin: 22px 0 4px;
+    }
+
+    h5 {
+        text-transform: uppercase;
+        color: #095484;
+    }
+
+    .main-block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3px;
+    }
+
+    form {
+        width: 80%;
+        padding: 20px;
+        box-shadow: 0 2px 5px #ccc;
+        background: #fff;
+    }
+
+    input,
+    select {
+        width: calc(100% - 10px);
+        padding: 5px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        vertical-align: middle;
+    }
+
+    textarea {
+        width: calc(100% - 6px);
+        outline: none;
+    }
+
+    input:hover,
+    textarea:hover {
+        outline: none;
+        border: 1px solid #095484;
+    }
+
+    .additional-question th,
+    .additional-question td {
+        width: 38%;
+    }
+
+    .course-rate th,
+    .course-rate td {
+        width: 19%;
+    }
+
+    .first-col,
+    .additional-question .first-col,
+    .course-rate .first-col {
+        width: 24%;
+        text-align: left;
+    }
+
+    .question,
+    .comments {
+        margin: 15px 0 5px;
+    }
+
+    .question-answer label {
+        display: inline-block;
+        padding: 0 20px 15px 0;
+    }
+
+    .question-answer input {
+        width: auto;
+    }
+
+    .question-answer,
+    table {
+        width: 100%;
+    }
+
+    .btn-block {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    button {
+        width: 150px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: #095484;
+        font-size: 16px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #0666a3;
+    }
+
+    @media (min-width: 568px) {
+        th,
+        td {
+            word-break: keep-all;
+        }
+    }
+        /* The Modal (background) */
+
+.popup .overlay {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  z-index:1;
+  display:none;
+}
+
+.popup .content {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:#fff;
+  width:50%;
+  height:30%;
+  z-index:2;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+  font-family:"Open Sans",sans-serif;
+}
+
+.popup .close-btn {
+  cursor:pointer;
+  position:absolute;
+  right:0;
+  top:0;
+  width:30px;
+  height:30px;
+  background:#222;
+  color:#fff;
+  font-size:25px;
+  font-weight:600;
+  line-height:30px;
+  text-align:center;
+  border-radius:50%;
+}
+
+.popup.active .overlay {
+  display:block;
+}
+
+.popup.active .content {
+  transition:all 300ms ease-in-out;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+h2 {
+        font-weight: 400;
+        color: #1c87c9;
+}
+/* end of model style */
+
+</style>
+{% endblock %} {% block section %}
+<div class="main-block" id="nompaper">
+    <form method="post">
+
+        {% csrf_token %}
+       <h1>Nomination Details</h1>
+        <h4>Name of post:{{p.panel_post}}</h4><br><br>
+
+
+        <div>
+           <table>
+                <tr>
+                    <th>1.Photo</th>
+                    <td><img src={{sd.stud_photo.url}} alt="hai" width="70" height="100"></td>
+                </tr>
+                <tr>
+                    <th>2. Name of the Candidate :</th>
+                    <td>{{sd.stud_fname}} {{sd.stud_mname}} {{sd.stud_lname}}</td>
+                </tr>
+
+                <tr>
+                    <th>3. Course:</th>
+                    <td>{{canc.course_name}}</td>
+                </tr>
+
+                <tr>
+                    <th>4.Department :</th>
+                    <td>{{cand.dept_name}}</td>
+                </tr>
+
+                <tr>
+                    <th>5.Gender :</th>
+                    {% ifequal sd.stud_gender 'M' %}
+                    <td>Male</td>
+                    {% else %}
+                    <td>Female</td>
+                    {% endifequal %}
+
+                </tr>
+
+
+                <tr>
+                    <th>6. Age and Date of Birth : </th>
+                    <td>{{age}} {{sd.stud_dob}}</td>
+                </tr>
+
+                <tr>
+                    <th>7.Contact Number</th>
+                    <td>{{sd.stud_mob}}</td>
+                </tr>
+            </table><br><br>
+            <h5>First Proposer</h5>
+        <table>
+
+                <tr>
+                    <th>Name:</th>
+                    <td>{{spd1.stud_fname}} {{spd1.stud_mname}} {{spd1.stud_lname}}</td>
+                </tr>
+
+                <tr>
+                    <th>Photo:</th>
+                    <td><img src={{spd1.stud_photo.url}} alt="hai" width="70" height="100"></td>
+
+                </tr>
+
+                <tr>
+                    <th>Course:</th>
+                    <td>{{spd1c.course_name}}</td>
+                </tr>
+
+                <tr>
+                    <th>Department:</th>
+                    <td>{{spd1c.course_name}}</td>
+                </tr>
+
+            </table><br><br>
+
+            <h5>Second Proposer</h5>
+
+            <table>
+
+
+                <tr>
+
+                    <th> Name  :</th>
+                    <td>{{spd2.stud_fname}} {{spd2.stud_mname}} {{spd2.stud_lname}}</td>
+                </tr>
+
+                 <tr>
+                    <th>Photo:</th>
+                    <td><img src={{spd2.stud_photo.url}} alt="hai" width="70" height="100"></td>
+
+                </tr>
+
+
+                <tr>
+                    <th>Course:</th>
+                    <td>{{spd2c.course_name}}</td>
+                </tr>
+
+                <tr>
+                    <th>Department:</th>
+                    <td>{{spd2c.course_name}}</td>
+                </tr>
+
+
+
+            </table><br><br>
+
+            <div class="btn-block">
+          <button type="submit" id="withdraw" name="withdraw" value={{cc.cand_id}}>Withdraw</button>
+        </div>
+        </div>
+    </form>
+
+<!-- The Modal -->
+<div class="popup" id="popup-1">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="close-btn" onclick="togglePopup()">&times;</div>
+    <h2 align="left">Message</h2>
+    <span id="popupMsg"></span>
+  </div>
+</div>
+
+
+    </form>
+</div> {% endblock %}

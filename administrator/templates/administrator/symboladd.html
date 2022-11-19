@@ -1,0 +1,213 @@
+ {% extends 'administrator/master.html' %} {% block head %}
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+<style>
+    form {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+    }
+
+    div,
+    h1,
+    input,
+    p {
+        padding: 0;
+        margin: 0;
+        outline: none;
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 16px;
+        color: #666;
+    }
+
+    h1 {
+        padding: 10px 0;
+        font-size: 32px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+    hr {
+        color: #a9a9a9;
+        opacity: 0.3;
+    }
+
+    .main-block {
+        max-width: 500px;
+        min-height: 300px;
+        padding: 10px 0;
+        margin: auto;
+        border-radius: 5px;
+        border: solid 1px #ccc;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, .31);
+        background: #ebebeb;
+    }
+
+    .btn-block {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    button {
+        width: 50%;
+        padding: 10px 0;
+        margin: 10px auto;
+        border-radius: 5px;
+        border: none;
+        background: #1c87c9;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    button:hover {
+        background: #26a9e0;
+    }
+        /* The Modal (background) */
+
+.popup .overlay {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  z-index:1;
+  display:none;
+}
+
+.popup .content {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:#fff;
+  width:50%;
+  height:30%;
+  z-index:2;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+  font-family:"Open Sans",sans-serif;
+}
+
+.popup .close-btn {
+  cursor:pointer;
+  position:absolute;
+  right:0;
+  top:0;
+  width:30px;
+  height:30px;
+  background:#222;
+  color:#fff;
+  font-size:25px;
+  font-weight:600;
+  line-height:30px;
+  text-align:center;
+  border-radius:50%;
+}
+
+.popup.active .overlay {
+  display:block;
+}
+
+.popup.active .content {
+  transition:all 300ms ease-in-out;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+h2 {
+        font-weight: 400;
+        color: #1c87c9;
+}
+/* end of model style */
+
+</style>
+
+{% endblock %} {% block section %}
+<div class="main-block">
+    <form method="post" id="form1" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center">
+            <tr align="center"><th><h3>Electoral Symbol</h3><hr color="red"></th></tr>
+            <tr><td height="30px"></td></tr>
+            <tr align="center"><td align="center">
+                <input type="file"  name="symbol" id="symbol" accept="image/jpeg, image/png, image/jpg" required onchange="readURL(this);"></td></tr>
+
+        <tr align="center"><td>
+            <img id="blah"/><br></td></tr>
+            <tr><td>
+        <div class="btn-block">
+            <button type="submit" id="formSubmit" >Submit</button>
+        </div>
+            </td></tr>
+        </table>
+        <br>
+
+<!-- The Modal -->
+<div class="popup" id="popup-1">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="close-btn" onclick="togglePopup()">&times;</div>
+    <h2 align="left">Message</h2>
+    <span id="popupMsg"></span>
+  </div>
+</div>
+
+        <div class="" align="center">
+            {% if sym.count %}
+            <p><u><h5 style="color:green">Existing Symbols</h5></u></p><br>
+                {% endif %}
+            <div class="row">
+                {% for i in sym %}
+                <div class="col-sm-6" style="padding:5px">
+                    <img src="{{ i.symbol_loc.url }}" alt="hi" width="80" height="100" align="center">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </form>
+
+</div>
+ <br><br>
+{% endblock %}
+
+ {% block script %}
+<script>
+    $(function() {
+        $(document).scrollTop($("#dataForm").offset().top);
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(70)
+                    .height(100);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(window).load(function() {
+
+       $(document).ready(function() {
+            $('#formSubmit').click(function(e) {
+            });
+       });
+    });
+
+
+</script>
+
+ {% endblock %}

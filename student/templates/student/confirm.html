@@ -1,0 +1,187 @@
+{% extends 'student/master.html' %} {% block head %}
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<style>
+    div,
+    form {
+        padding: 0;
+        margin: 0;
+        outline: none;
+        font-family: Roboto, Arial, sans-serif;
+        color: #666;
+        line-height: 22px;
+    }
+    
+    h1 {
+        font-weight: 400;
+        align: center;
+    }
+    
+    .testbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+        padding: 3px;
+    }
+    
+    form {
+        width: 80%;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 2px 5px #ccc;
+    }
+    
+    button {
+        width: calc(100% - 10px);
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        vertical-align: middle;
+    }
+    
+    button:hover {
+        border: 1px solid #1c87c9;
+    }
+    
+    table {
+        width: 100%;
+    }
+    
+    h4 {
+        padding: 15px 0 5px;
+    }
+    
+    .question-answer label {
+        display: inline-block;
+        padding: 0 20px 15px 0;
+    }
+    
+    .question-answer input {
+        width: auto;
+    }
+    
+    th,
+    td {
+        width: 20%;
+        padding: 15px 0;
+        text-align: left;
+        line-height: 18px;
+        font-weight: 400;
+        word-break: break-all;
+        border-bottom: 1px solid #095484;
+        color: #095484;
+    }
+    
+    .first-col {
+        width: 26%;
+        text-align: left;
+    }
+    
+    .btn-block {
+        margin-top: 20px;
+        text-align: center;
+    }
+    
+    button {
+        width: 80px;
+        padding: 10px;
+        border: none;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        background-color: #095484;
+        font-size: 10px;
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #0666a3;
+    }
+
+</style>
+{% endblock %} {% block section %}
+<div class="testbox" id="confirm">
+    <form method="post">
+        {% csrf_token %}
+        <h1>Confirmation</h1><br>
+        <table>
+            <tr>
+
+                <th><b>Notification</b></th>
+                <th colspan="2"><b><center>Action</center></b></th>
+
+            </tr>
+            {% if ps %}
+            {% for p in ps %}
+            <tr>
+
+
+                <td>The Student Organization {{p.party_name}} choose you as their lead</td>
+                <td colspan="2">
+                    <div class="btn-block">
+                        <button type="submit" value="paccept"  name="btn" style="background-color:green">Accept</button>
+                    </div>
+
+                    <div class="btn-block">
+                       <button type="submit" value="preject" name="btn" style="background-color:red">Reject</button>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+
+            <tr>
+
+                {% if ca %}
+
+
+                <td>The Student Organization {{par.party_name}}  choose you as their {{pp.panel_post}} candidate</td>
+                <td colspan="2">
+                    <div class="btn-block">
+                        <button type="submit" value="Caccept" name="btn" style="background-color:green">Accept</button>
+                    </div>
+
+                    <div class="btn-block">
+                       <button type="submit" value="Creject" name="btn" style="background-color:red">Reject</button>
+                    </div>
+                </td>
+            </tr>
+            {% endif %}
+
+             <tr>
+
+                {% if c %}
+
+
+                <td>Candidate {{cs.stud_fname}} {{cs.stud_mname}} {{cs.stud_lname}} choose you as their proposer</td>
+                <td colspan="2">
+                    <div class="btn-block">
+                        <button type="submit" value="Saccept" name="btn" style="background-color:green">Accept</button>
+                    </div>
+
+                    <div class="btn-block">
+                       <button type="submit" value="Sreject" name="btn" style="background-color:red">Reject</button>
+                    </div>
+                </td>
+            </tr>
+            {% endif %}
+
+        </table>
+
+    </form>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+    "{% if not messages %}"
+    $(function() {
+        $(document).scrollTop($("#dataForm").offset().top);
+    });
+    "{% endif %}"
+ </script>
+
+{% endblock %}

@@ -1,0 +1,378 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'home/assets/images/icons/favicon.ico' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/vendor/animate/animate.css ' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/vendor/css-hamburgers/hamburgers.min.css ' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/vendor/animsition/css/animsition.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/vendor/daterangepicker/daterangepicker.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/css/main.css' %}">
+    <!--===============================================================================================-->
+    <title>COLLEGE ELECTION</title>
+    {% block head %} {% endblock %}
+
+
+    <!--
+
+Breezed Template
+
+https://templatemo.com/tm-543-breezed
+
+-->
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/css/font-awesome.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/assets/css/templatemo-breezed.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/assets/css/owl-carousel.css' %}">
+
+    <link rel="stylesheet" href="{% static 'home/assets/css/lightbox.css' %}">
+
+    <style>
+        /* The Modal (background) */
+
+.popup .overlay {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  z-index:1;
+  display:none;
+}
+
+.popup .content {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:#fff;
+  width:50%;
+  height:30%;
+  z-index:2;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+  font-family:"Open Sans",sans-serif;
+}
+
+.popup .close-btn {
+  cursor:pointer;
+  position:absolute;
+  right:0;
+  top:0;
+  width:30px;
+  height:30px;
+  background:#222;
+  color:#fff;
+  font-size:25px;
+  font-weight:600;
+  line-height:30px;
+  text-align:center;
+  border-radius:50%;
+}
+
+.popup.active .overlay {
+  display:block;
+}
+
+.popup.active .content {
+  transition:all 300ms ease-in-out;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+h3 {
+        font-weight: 400;
+        color: #1c87c9;
+}
+/* end of model style */
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        setTimeout(function() {
+            document.getElementById("js-preloader").className = "js-preloader loaded";
+        }, 1000);
+    </script>
+
+
+    <!-- ***** Preloader End ***** -->
+
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="http://127.0.0.1:8000/home/" class="logo">
+                            <strong>ELECTION</strong>
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="http://127.0.0.1:8000/home/" title="Move to top" href="#top" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="http://127.0.0.1:8000/home/login/"><b>LOGIN</b></a></li>
+                            <!-- <li class="scroll-to-section"><a title="Register" href="http://127.0.0.1:8000/home/partyadd/">Student Organization Registration</a></li> -->
+                            <!--                           <li class="scroll-to-section"><a href="#projects">Projects</a></li> 
+                            <li class="submenu">
+                                <a href="javascript:;">Drop Down</a>
+                                <ul>
+                                    <li><a href="">About Us</a></li>
+                                    <li><a href="">Features</a></li>
+                                    <li><a href="">FAQ's</a></li>
+                                    <li><a href="">Blog</a></li>
+                                </ul>
+                            </li>
+      -->                   {% if menuHide %}
+                                <li class="scroll-to-section" title="Available only during the Election Time"><a style="pointer-events: none; cursor: default;color:brown" href="http://127.0.0.1:8000/home/pollingpercent/">Polling Percentage</a></li>
+                            {% else %}
+                                <li class="scroll-to-section"><a href="http://127.0.0.1:8000/home/pollingpercent/">Polling Percentage</a></li>
+                            {% endif %}
+                            <li class="scroll-to-section"><a title="Result of last Election" href="http://127.0.0.1:8000/home/result/">RESULT</a></li>
+<!--                            <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li> -->
+
+                            <!-- <div class="search-icon">
+                                <a href="#search"><i class="fa fa-search"></i></a>
+                            </div>-->
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Search Area ***** 
+    <div id="search">
+        <button type="button" class="close">×</button>
+        <form id="contact" action="#" method="get">
+            <fieldset>
+                <input type="search" name="q" placeholder="SEARCH KEYWORD(s)" aria-label="Search through site content">
+            </fieldset>
+            <fieldset>
+                <button type="submit" class="main-button">Search</button>
+            </fieldset>
+        </form>
+    </div> -->
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner header-text" id="top">
+        <div class="Modern-Slider">
+            <!-- Item -->
+            <div class="item">
+                <div class="img-fill">
+                    <img src="{% static 'home/assets/images/slide-01.jpg' %}" alt="">
+                    <div class="text-content">
+                        <h3>Welcome To COLLEGE ELECTION</h3>
+                        <h5>A Platform for Online Election</h5>
+                        <!--
+                        <a href="#" class="main-stroked-button">Learn More</a>
+                        <a href="#" class="main-filled-button">Get It Now</a>
+                        -->
+                    </div>
+                </div>
+            </div>
+            <!-- // Item -->
+            <!-- Item -->
+            <div class="item">
+                <div class="img-fill">
+                    <img src="{% static 'home/assets/images/slide-02.jpg' %}" alt="">
+                    <div class="text-content">
+                        <h3>Make Things Faster</h3>
+                        <h5>..................</h5>
+                        <!--
+                        <a href="#" class="main-stroked-button">Read More</a>
+                        <a href="#" class="main-filled-button">Take Action</a>
+                        -->
+                    </div>
+                </div>
+            </div>
+            <!-- // Item -->
+            <!-- Item -->
+            <div class="item">
+                <div class="img-fill">
+                    <img src="{% static 'home/assets/images/slide-03.jpg' %}" alt="">
+                    <div class="text-content">
+                        <h3>Easy & Fast</h3>
+                        <h5>Instant Result Publish</h5>
+                        <!--
+                        <a href="#" class="main-stroked-button">Learn More</a>
+                        <a href="#" class="main-filled-button">Get It Now</a>
+                        -->
+                    </div>
+                </div>
+            </div>
+            <!-- // Item -->
+        </div>
+
+    </div>
+  <!--  <div class="scroll-down scroll-to-section"><a href="#dataForm"><i class="fa fa-arrow-down"></i></a></div> -->
+    <!-- ***** Main Banner Area End ***** -->
+
+    <!-- ***** About Area Starts ***** -->
+
+
+    <section class="section" id="dataForm">
+    {% block section %} {% endblock %}
+    </section>
+      <div class="img-fill">
+            <div class="row">
+                {% if elect_status %}
+                    <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="color:darkblue;background: rgb(51, 155, 158);background: linear-gradient(145deg, rgba(51, 155, 158, 1) 0%, rgba(104, 204, 152, 1) 100%);">
+                        <b>ELECTION to <font color="red"><i>COLLEGE UNION-{{ ee.elect_date.year }}</i></font> has been declared.<a style="color:black" target="_blank" href="http://127.0.0.1:8000/home/electionDetails"> Click here to see the Details...</a></b>
+                    </marquee>
+                {% endif %}
+            </div>
+      </div>
+
+
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-xs-12">
+                    <div class="left-text-content">
+                   
+                            <a rel="nofollow noopener" href="#"></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xs-12">
+                    <div class="right-text-content">
+                        <ul class="social-icons">
+                            <li>
+                                <p>Follow Us</p>
+                            </li>
+                            <li><a rel="nofollow" href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a rel="nofollow" href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a rel="nofollow" href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a rel="nofollow" href="#"><i class="fa fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery -->
+    <script src="{% static 'home/assets/js/jquery-2.1.0.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'home/assets/js/popper.js' %}"></script>
+    <script src="{% static 'home/assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins -->
+    <script src="{% static 'home/assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'home/assets/js/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'home/assets/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'home/assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'home/assets/js/imgfix.min.js' %}"></script>
+    <script src="{% static 'home/assets/js/slick.js' %}"></script>
+    <script src="{% static 'home/assets/js/lightbox.js' %}"></script>
+    <script src="{% static 'home/assets/js/isotope.js' %}"></script>
+
+    <!-- Global Init -->
+    <script src="{% static 'home/assets/js/custom.js' %}"></script>
+
+    <script>
+        $(function() {
+            var selectedClass = "";
+            $("p").click(function() {
+                selectedClass = $(this).attr("data-rel");
+                $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("." + selectedClass).fadeOut();
+                setTimeout(function() {
+                    $("." + selectedClass).fadeIn();
+                    $("#portfolio").fadeTo(50, 1);
+                }, 500);
+
+            });
+        });
+    </script>
+
+    <!-- The Modal -->
+<div class="popup" id="popup-1">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="close-btn" onclick="togglePopup()">&times;</div>
+    <h3 align="left">Message</h3>
+    <span id="popupMsg"></span>
+  </div>
+</div>
+
+</body>
+</html>
+
+<script type='text/javascript'>
+
+// model function
+
+
+function togglePopup(){
+  document.getElementById("popup-1").classList.toggle("active");
+}
+
+    $(window).load(function() {
+
+        "{% if messages %} {% for message in messages %}"
+                    $('#popupMsg').html("<br>{{ message }}");
+                    $('#popupMsg').css('color','green');
+                    $('#popupMsg').css('font-size','20px');
+                    togglePopup();
+        "{% endfor %}  {% endif %}"
+    });
+</script>
+
+{% block script %} {% endblock %}

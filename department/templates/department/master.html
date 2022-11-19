@@ -1,0 +1,325 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>COLLEGE ELECTION - Department Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"> {% block head %} {% endblock %}
+
+
+
+    <!--
+
+Breezed Template
+
+https://templatemo.com/tm-543-breezed
+
+-->
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'department/assets/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'department/assets/css/font-awesome.css' %}">
+
+    <link rel="stylesheet" href="{% static 'department/assets/css/templatemo-breezed.css' %}">
+
+    <link rel="stylesheet" href="{% static 'department/assets/css/owl-carousel.css' %}">
+
+    <link rel="stylesheet" href="{% static 'department/assets/css/lightbox.css' %}">
+
+    <style>
+        /* The Modal (background) */
+
+.popup .overlay {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  z-index:1;
+  display:none;
+}
+
+.popup .content {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:#fff;
+  width:50%;
+  height:30%;
+  z-index:2;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+  font-family:"Open Sans",sans-serif;
+}
+
+.popup .close-btn {
+  cursor:pointer;
+  position:absolute;
+  right:0;
+  top:0;
+  width:30px;
+  height:30px;
+  background:#222;
+  color:#fff;
+  font-size:25px;
+  font-weight:600;
+  line-height:30px;
+  text-align:center;
+  border-radius:50%;
+}
+
+.popup.active .overlay {
+  display:block;
+}
+
+.popup.active .content {
+  transition:all 300ms ease-in-out;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+h3 {
+        font-weight: 400;
+        color: #1c87c9;
+}
+/* end of model style */
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        setTimeout(function() {
+            document.getElementById("js-preloader").className = "js-preloader loaded";
+        }, 1000);
+    </script>
+
+
+    <!-- ***** Preloader End ***** -->
+
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="http://127.0.0.1:8000/home/department/" class="logo">
+                            <strong>ELECTION</strong>
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+
+
+                            <li class="submenu">
+                                <a href="javascript:;">Add</a>
+                                <ul>
+                                    <li><a href="http://127.0.0.1:8000/home/department/AddStudent/">Student</a></li>
+                                    <!-- <li><a href="http://127.0.0.1:8000/home/department/AddCourse/">Courses</a></li> -->
+
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="">Edits</a>
+                                <ul>
+                                    <!-- <li><a href="http://127.0.0.1:8000/home/department/CourseEdit/">Course</a></li> -->
+                                    <li><a href="http://127.0.0.1:8000/home/department/DeptEdit/">Department</a></li>
+
+                                </ul>
+                            </li> 
+
+                            <li class="scroll-to-section"><a href="http://127.0.0.1:8000/home/login"><b>LOGOUT</b></a></li>
+
+                            <!-- <div class="search-icon">
+                                <a href="#search"><i class="fa fa-search"></i></a>
+                            </div>-->
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Search Area ***** 
+    <div id="search">
+        <button type="button" class="close">×</button>
+        <form id="contact" action="#" method="get">
+            <fieldset>
+                <input type="search" name="q" placeholder="SEARCH KEYWORD(s)" aria-label="Search through site content">
+            </fieldset>
+            <fieldset>
+                <button type="submit" class="main-button">Search</button>
+            </fieldset>
+        </form>
+    </div> -->
+
+    <!-- ***** Main Banner Area Start ***** -->
+
+    <div class="main-banner header-text" id="top">
+        <div class="Modern-Slider">
+            <!-- Item -->
+            <div class="item">
+                <div class="img-fill">
+                    <img src="{% static 'department/assets/images/slide-01.jpg' %}" alt="">
+                </div>
+            </div>
+            <!-- // Item -->
+            <!-- Item -->
+            <div class="item">
+                <div class="img-fill">
+                    <img src="{% static 'department/assets/images/slide-02.jpg' %}" alt="">
+                </div>
+            </div>
+            <!-- // Item -->
+            <!-- Item -->
+            <div class="item">
+                <div class="img-fill">
+                    <img src="{% static 'department/assets/images/slide-03.jpg' %}" alt="">
+                </div>
+            </div>
+            <!-- // Item -->
+        </div>
+    </div>
+    <div class="scroll-down scroll-to-section"><a href="#dataForm"><i class="fa fa-arrow-down"></i></a></div>
+    <!-- ***** Main Banner Area End ***** -->
+
+    <!-- ***** About Area Starts ***** -->
+
+
+    <section class="section" id="dataForm">
+        {% block section %} {% endblock %}
+        <!-- The Modal -->
+<div class="popup" id="popup-1">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="close-btn" onclick="togglePopup()">&times;</div>
+    <h3 align="left">Message</h3>
+    <span id="popupMsg"></span>
+  </div>
+</div>
+    </section>
+
+
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-xs-12">
+                    <div class="left-text-content">
+                        <!-- <p>Copyright &copy; 2020 : TEAM_PRO<br><marquee><b><font color="black">{{ name }}</font></b></marquee> -->
+                            <a rel="nofollow noopener" href="#"></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xs-12">
+                    <div class="right-text-content">
+                        <ul class="social-icons">
+                            <li>
+                                <p>Follow Us</p>
+                            </li>
+                            <li><a rel="nofollow" href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a rel="nofollow" href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a rel="nofollow" href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a rel="nofollow" href="#"><i class="fa fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="{% static 'department/assets/js/jquery-2.1.0.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'department/assets/js/popper.js' %}"></script>
+    <script src="{% static 'department/assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins -->
+    <script src="{% static 'department/assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'department/assets/js/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'department/assets/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'department/assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'department/assets/js/imgfix.min.js' %}"></script>
+    <script src="{% static 'department/assets/js/slick.js' %}"></script>
+    <script src="{% static 'department/assets/js/lightbox.js' %}"></script>
+    <script src="{% static 'department/assets/js/isotope.js' %}"></script>
+
+    <!-- Global Init -->
+    <script src="{% static 'department/assets/js/custom.js' %}"></script>
+
+    <script>
+        $(function() {
+            var selectedClass = "";
+            $("p").click(function() {
+                selectedClass = $(this).attr("data-rel");
+                $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("." + selectedClass).fadeOut();
+                setTimeout(function() {
+                    $("." + selectedClass).fadeIn();
+                    $("#portfolio").fadeTo(50, 1);
+                }, 500);
+
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>
+
+<script type='text/javascript'>
+
+// model function
+
+function togglePopup(){
+  document.getElementById("popup-1").classList.toggle("active");
+}
+
+    $(window).load(function() {
+
+        "{% if messages %} {% for message in messages %}"
+                    $('#popupMsg').html("<br>{{ message }}");
+                    $('#popupMsg').css('color','green');
+                    $('#popupMsg').css('font-size','20px');
+                    togglePopup();
+        "{% endfor %}  {% endif %}"
+    });
+</script>
+
+{% block script %}
+{% endblock %}

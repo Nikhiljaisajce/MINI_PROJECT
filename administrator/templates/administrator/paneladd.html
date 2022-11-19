@@ -1,0 +1,456 @@
+{% extends 'administrator/master.html' %} {% load static %} {% block head %}
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+<style>
+    div,
+    form,
+    input,
+    select,
+    p {
+        padding: 0;
+        margin: 0;
+        outline: none;
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 14px;
+        color: #666;
+        line-height: 22px;
+    }
+    
+    h1 {
+        position: absolute;
+        margin: 0;
+        font-size: 32px;
+        color: #fff;
+        z-index: 2;
+    }
+    
+    h5 {
+        margin: 10px 0;
+    }
+    
+    .testbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+        padding: 20px;
+    }
+    
+    form {
+        width: 50%;
+        padding: 20px;
+        border-radius: 6px;
+        background: #fff;
+        box-shadow: 0 0 20px 0 #095484;
+    }
+    
+    .banner {
+        position: relative;
+        height: 210px;
+        background-image: url("{% static 'administrator/assets/images/paneladd.jpeg' %}");
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .banner::after {
+        content: "";
+        background-color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    
+    input,
+    select {
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    
+    input {
+        width: calc(100% - 10px);
+        padding: 5px;
+    }
+    
+    select {
+        width: calc(100% - 10px);
+        padding: 7px 0;
+        background: transparent;
+        text-decoration: solid;
+    }
+    
+    textarea {
+        width: calc(100% - 12px);
+        padding: 5px;
+    }
+    
+    .item1:hover p,
+    .item1:hover i,
+    .question:hover p,
+    .question label:hover,
+    input:hover::placeholder,
+    a {
+        color: #095484;
+    }
+    
+    .item1 input:hover,
+    .item1 select:hover,
+    .item1 textarea:hover {
+        border: 1px solid transparent;
+        box-shadow: 0 0 6px 0 #095484;
+        color: #095484;
+    }
+    
+    .item1 {
+        position: relative;
+        margin: 10px 0;
+    }
+    
+    input[type="date"]::-webkit-inner-spin-button {
+        display: none;
+    }
+    
+    .item1 i,
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        position: absolute;
+        font-size: 20px;
+        color: #a9a9a9;
+    }
+    
+    .item1 i {
+        right: 2%;
+        top: 30px;
+        z-index: 1;
+    }
+    
+    [type="date"]::-webkit-calendar-picker-indicator {
+        right: 1%;
+        z-index: 2;
+        opacity: 0;
+        cursor: pointer;
+    }
+    
+    input[type=radio],
+    input[type=checkbox] {
+        display: none;
+    }
+    
+    label.radio,
+    label.check {
+        position: relative;
+        display: inline-block;
+        margin: 5px 20px 15px 0;
+        cursor: pointer;
+    }
+    
+    .question span {
+        margin-left: 30px;
+    }
+    
+    span.required {
+        margin-left: 0;
+        color: red;
+    }
+    
+    .checkbox-item1 label {
+        margin: 5px 20px 10px 0;
+    }
+    
+    label.radio:before,
+    label.check:before {
+        content: "";
+        position: absolute;
+        left: 0;
+    }
+    
+    label.radio:before {
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        border: 2px solid #095484;
+    }
+    
+    label.check:before {
+        top: 2px;
+        width: 16px;
+        height: 16px;
+        border-radius: 2px;
+        border: 1px solid #095484;
+    }
+    
+    input[type=checkbox]:checked+.check:before {
+        background: #095484;
+    }
+    
+    label.radio:after {
+        left: 5px;
+        border: 3px solid #095484;
+    }
+    
+    label.check:after {
+        left: 4px;
+        border: 3px solid #fff;
+    }
+    
+    label.radio:after,
+    label.check:after {
+        content: "";
+        position: absolute;
+        top: 6px;
+        width: 8px;
+        height: 4px;
+        background: transparent;
+        border-top: none;
+        border-right: none;
+        transform: rotate(-45deg);
+        opacity: 0;
+    }
+    
+    input[type=radio]:checked+label:after,
+    input[type=checkbox]:checked+label:after {
+        opacity: 1;
+    }
+    
+    .btn-block {
+        margin-top: 10px;
+        text-align: center;
+    }
+    
+    input[type=submit] {
+        width: 150px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: #095484;
+        font-size: 16px;
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+        background: #0666a3;
+    }
+
+    @media (max-width: 568px) {
+        form {
+            width:100%;
+        }
+    }
+
+    @media (min-width: 568px) {
+        .city-item1 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .city-item1 input {
+            width: calc(50% - 20px);
+        }
+        .city-item1 select {
+            width: calc(50% - 8px);
+        }
+    }
+
+        /* The Modal (background) */
+
+.popup .overlay {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  z-index:1;
+  display:none;
+}
+
+.popup .content {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:#fff;
+  width:50%;
+  height:30%;
+  z-index:2;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+  font-family:"Open Sans",sans-serif;
+}
+
+.popup .close-btn {
+  cursor:pointer;
+  position:absolute;
+  right:0;
+  top:0;
+  width:30px;
+  height:30px;
+  background:#222;
+  color:#fff;
+  font-size:25px;
+  font-weight:600;
+  line-height:30px;
+  text-align:center;
+  border-radius:50%;
+}
+
+.popup.active .overlay {
+  display:block;
+}
+
+.popup.active .content {
+  transition:all 300ms ease-in-out;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+h2 {
+        font-weight: 400;
+        color: #1c87c9;
+}
+/* end of model style */
+
+</style>
+
+{% endblock %} {% block section %}
+
+<div class="testbox">
+    <form method="post">
+        {% csrf_token %}
+        <div class="banner">
+            <h1>Election Panel</h1>
+        </div>
+
+        <div class="item1">
+            <p><b>Panel Name<span class="required">*</span></b></p>
+            <input type="text" name="pname" id="pname" required/>
+            <br><span id="spnpnameStatus"></span>
+<!-- 
+
+            <p>Panel Type<span class="required">*</span></p>
+            <select id="ptype" name="ptype" required>
+            <option value="" >Select</option>
+            <option value="0" selected>General</option>
+            <option value="1">Female</option> -->
+
+          </select>
+
+            <p>Year of Batch<span class="required">*</span></p>
+            <select id="yob" name="yob" required>
+            <option value="" >Select</option>
+                <option value="0" selected>All years</option>
+                <option value="1">1st Year</option>
+            <option value="2">2nd Year</option>
+            <option value="3">3rd Year</option>
+            <option value="4">4th Year</option>
+
+        </select>
+        </div>
+
+
+        <div class="question">
+            <!-- <p>Course Type<m style="color:red">&nbsp;(Need to choose only for specific panels)</m></p> -->
+            <div class="question-answer checkbox-item">
+                 {% for c in courses %}
+                <div>
+                    <input type="checkbox" value={{c.course_id}} id={{c.course_id}} name="checks" />
+                    <label for={{c.course_id}} class="check" style="color:darkblue"><span><b>{{c.course_name}}</b>,&nbsp;({{c.dept_id.dept_name}}) ({{c.course_type}})</span></label>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        <br />
+
+        <div class="btn-block">
+            <input type="submit" name="panelsubmit" id="panelsubmit" value='Submit'>
+        </div>
+        {% if d %}
+    <div align="right">
+        <hr color="red">
+        <table>
+            <tr align="right">
+                <th>Panels</th>
+            </tr>
+            {% for i in d %}
+                <tr align="right">
+                    <td>
+                        {{ i.panel_post }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+    </form>
+    <!-- The Modal -->
+<div class="popup" id="popup-1">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="close-btn" onclick="togglePopup()">&times;</div>
+    <h2 align="left">Message</h2>
+    <span id="popupMsg"></span>
+  </div>
+</div>
+
+</div>
+
+{% endblock %} {% block script %}
+<script type='text/javascript'>
+    $(function() {
+        $(document).scrollTop($("#dataForm").offset().top);
+    });
+
+    $(window).load(function() {
+
+
+        $(document).ready(function() {
+            $('#pname').blur(function(e) {
+                if (validateName('pname')) {
+                    $('#spnpnameStatus').html('Valid Panel name');
+                    $('#spnpnameStatus').css('color', 'green');
+                } else {
+                    $('#spnpnameStatus').html('Invalid Panel name');
+                    $('#spnpnameStatus').css('color', 'red');
+
+                }
+            });
+
+            $('#panelSubmit').click(function(e) {
+
+
+                if (validateName('pname')) {
+                    //
+                } else {
+                    $('#spnpnameStatus').html('Invalid Panel name');
+                    $('#spnpnameStatus').css('color', 'red');
+                    var flag = 0;
+
+                }
+
+                if (flag == 0) {
+                    return false;
+                }
+
+            });
+        });
+
+        function validateName(name) {
+            var a = document.getElementById(name).value;
+            var filter = /^[a-zA-Z\s]+$/;
+            if (filter.test(a)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    });
+</script>
+
+{% endblock %}

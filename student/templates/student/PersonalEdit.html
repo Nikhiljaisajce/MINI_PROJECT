@@ -1,0 +1,198 @@
+
+   {% extends 'student/master.html' %}
+    {% block head %}
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <style>
+
+      body, input {
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 22px;
+      }
+      p {
+      font-weight: 400;
+      }
+      h4 {
+      margin: 22px 0 4px;
+      }
+      h5 {
+
+      color: #095484;
+      }
+      .main-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3px;
+      }
+      form {
+      width: 100%;
+      padding: 20px;
+      box-shadow: 0 2px 5px #ccc;
+      background: #fff;
+      }
+      input {
+      width: calc(100% - 10px);
+      padding: 5px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      vertical-align: middle;
+      }
+      textarea {
+      width: calc(100% - 6px);
+      outline: none;
+      }
+      input:hover, textarea:hover {
+      outline: none;
+      border: 1px solid #095484;
+      }
+      th, td {
+      //width: 15%;
+      padding: 15px 0;
+
+      vertical-align: unset;
+      line-height: 18px;
+      font-weight: 400;
+      word-break: break-all;
+      }
+      .additional-question th, .additional-question td {
+      width: 38%;
+      }
+      .course-rate th, .course-rate td {
+      width: 19%;
+      }
+      .first-col, .additional-question  .first-col, .course-rate .first-col {
+      width: 24%;
+      text-align: left;
+      }
+      .question, .comments {
+      margin: 15px 0 5px;
+      }
+      .question-answer label {
+      display: inline-block;
+      padding: 0 20px 15px 0;
+      }
+      .question-answer input {
+      width: auto;
+      }
+      .question-answer, table {
+      width: 100%;
+      }
+      .btn-block1 {
+      margin-top: 20px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: green;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      background: darkgreen;
+      }
+      @media (min-width: 568px) {
+      th, td {
+      word-break: keep-all;
+      }
+      }
+    .partyp {
+	display: table;
+    }
+.partyp tr {
+	display: table-cell;
+}
+.partyp tr  td {
+	display: block;
+	border-bottom: 0px solid #ccc;
+
+}
+table{
+    border-radius:12px;
+    border-color:orange;
+    background-image: linear-gradient(to bottom right, orange, white);
+}
+
+    </style>
+   {% endblock %}
+
+   {% block section %}
+    <div class="main-block">
+      <form method="post" id="form1">
+        {% csrf_token %}
+          <div>
+
+              <table align="center" bgcolor="lightgreen" style="width:80%">
+
+                  <tr align="center">
+                      <th style="color:blue" colspan="2"><h2><b>PERSONAL INFORMATION</b></h2></th>
+                  </tr>
+                  <tr>
+                      <td colspan="2" align="center" ><img src="{{s.stud_photo.url}}" width="120" height="130" alt="Not Available" /></td>
+                  </tr>
+                  <tr>
+                      <td style="padding:12px;"><b>ID</b></td>
+                      <td style="color:brown;padding-left:15px;"><b>{{s.stud_id}}</b></td>
+                  </tr>
+                  <tr>
+                      <td style="padding:12px;"><b>Name</b></td>
+                      <td style="color:brown;padding-left:15px;text-transform:uppercase"><b>{{s.stud_fname}} {{s.stud_mname}} {{s.stud_lname}}</b></td>
+                  </tr>
+                  <tr>
+                      <td style="padding:12px;"><b>Date of Birth</b></td>
+                      <td style="color:brown;padding-left:15px;"><b>{{s.stud_dob}}</b></td>
+                  </tr>
+                  <tr>
+                      <td style="padding:12px;"><b>Email Address</b></td>
+                      <td style="color:brown;padding-left:15px;"><b>{{s.stud_email}}</b></td>
+                  </tr>
+                  <tr>
+                      <td style="padding:12px;"><b>Mobile No.</b></td>
+                      <td style="color:brown;padding-left:15px;"><b>{{s.stud_mob}}</b></td>
+                  </tr>
+                  <tr>
+                      <td style="padding:12px;"><b>Department</b></td>
+                      <td style="color:brown;padding-left:15px;"><b>{{s.stud_course_id.dept_id.dept_name}}</b></td>
+                  </tr>
+                  <tr>
+                      <td style="padding:12px;"><b>Course</b></td>
+                      <td style="color:brown;padding-left:15px;"><b>{{s.stud_course_id.course_name}}</b></td>
+                  </tr>
+                  <tr>
+                      <td style="padding:12px;"><b>Course Start Date</b></td>
+                      <td style="color:brown;padding-left:15px;"><b>{{s.stud_start_date}}</b></td>
+                  </tr>
+                  <tr>
+                      <td style="padding:12px;"><b>Course End Date</b></td>
+                      <td style="color:brown;padding-left:15px;"><b>{{s.stud_end_date}}</b></td>
+                  </tr>
+
+
+
+              </table>
+
+
+          </div>
+      </form>
+    </div>
+   {% endblock %}
+
+   {% block script %}
+<script type='text/javascript'>
+    "{% if not messages %}"
+    $(function() {
+        $(document).scrollTop($("#form1").offset().top);
+    });
+    "{% endif %}"
+ </script>
+
+{% endblock %}
